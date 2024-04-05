@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 import inquirer from "inquirer";
 let todolist = [];
 async function manageTodoList() {
@@ -6,7 +7,7 @@ async function manageTodoList() {
             name: "action",
             message: "What would you like to do?",
             type: "list",
-            choices: ["Add item", "Remove item", "Change item", "Exit",],
+            choices: ["Add item", "Remove item", "Change item", "Exit"],
         });
         switch (action.action) {
             case "Add item":

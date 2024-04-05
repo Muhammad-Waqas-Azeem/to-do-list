@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 import inquirer from "inquirer";
 
 let todolist: any[] = [];
@@ -8,7 +9,7 @@ async function manageTodoList() {
       name: "action",
       message: "What would you like to do?",
       type: "list",
-      choices: ["Add item", "Remove item","Change item","Exit",],
+      choices: ["Add item", "Remove item", "Change item", "Exit"],
     });
 
     switch (action.action) {
@@ -54,12 +55,11 @@ async function removeItem() {
       },
     ]);
     if (removeItem.index >= 0 && removeItem.index < todolist.length) {
-        const removedItem = todolist.splice(removeItem.index, 1);
-        console.log(`Removed item: ${removedItem}`);
-        console.log("Updated todo list:");
-        console.log(todolist);
-    } 
-    else {
+      const removedItem = todolist.splice(removeItem.index, 1);
+      console.log(`Removed item: ${removedItem}`);
+      console.log("Updated todo list:");
+      console.log(todolist);
+    } else {
       return console.log("Please enter a valid index");
     }
   }
@@ -78,19 +78,16 @@ async function changeItem() {
       },
     ]);
     if (changeItem.index >= 0 && changeItem.index < todolist.length) {
-      const change=await inquirer.prompt({
+      const change = await inquirer.prompt({
         message: "Enter the  item  to change:",
         type: "input",
         name: "changeditem",
-
-      })
+      });
       todolist[changeItem.index] = change.changeditem;
 
-
-       console.log("Updated todo list:");
-        console.log(todolist);
-    } 
-    else {
+      console.log("Updated todo list:");
+      console.log(todolist);
+    } else {
       return console.log("Please enter a valid index");
     }
   }
