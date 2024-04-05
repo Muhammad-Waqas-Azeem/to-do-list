@@ -6,7 +6,7 @@ async function manageTodoList() {
             name: "action",
             message: "What would you like to do?",
             type: "list",
-            choices: ["Add item", "Remove item", "Exit"],
+            choices: ["Add item", "Remove item", "Change item", "Exit",],
         });
         switch (action.action) {
             case "Add item":
@@ -14,6 +14,9 @@ async function manageTodoList() {
                 break;
             case "Remove item":
                 await removeItem();
+                break;
+            case "Change item":
+                await changeItem();
                 break;
             case "Exit":
                 console.log("Exiting...");
@@ -41,14 +44,42 @@ async function removeItem() {
     else {
         const removeItem = await inquirer.prompt([
             {
-                message: "Enter the number of the item to remove:",
+                message: "Enter the index of the item to remove:",
                 type: "number",
                 name: "index",
             },
         ]);
         if (removeItem.index >= 0 && removeItem.index < todolist.length) {
-            const removedItem = todolist.splice((removeItem.index) - 1, 1);
+            const removedItem = todolist.splice(removeItem.index, 1);
             console.log(`Removed item: ${removedItem}`);
+            console.log("Updated todo list:");
+            console.log(todolist);
+        }
+        else {
+            return console.log("Please enter a valid index");
+        }
+    }
+}
+async function changeItem() {
+    if (todolist.length === 0) {
+        console.log("Todo list is empty!");
+        return;
+    }
+    else {
+        const changeItem = await inquirer.prompt([
+            {
+                message: "Enter the index of the item you want to change:",
+                type: "number",
+                name: "index",
+            },
+        ]);
+        if (changeItem.index >= 0 && changeItem.index < todolist.length) {
+            const change = await inquirer.prompt({
+                message: "Enter the  item  to change:",
+                type: "input",
+                name: "changeditem",
+            });
+            todolist[changeItem.index] = change.changeditem;
             console.log("Updated todo list:");
             console.log(todolist);
         }
