@@ -1,6 +1,6 @@
 {
   "name": "mwr-tc-64-to-do-list",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple command line based to do app",
   "main": "index.js",
   "type": "module",
